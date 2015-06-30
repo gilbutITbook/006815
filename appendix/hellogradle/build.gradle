@@ -1,0 +1,41 @@
+buildscript {
+    repositories() {   // 빌드 스크립트에서 의존 라이브러리를 찾는 데 사용할 리포지토리를 선언합니다.
+        mavenCentral() // 메이븐의 리포지토리를 사용합니다.
+    }
+    dependencies { // 빌드 스크립트에서 사용할 의존 라이브러리를 선언합니다.
+        // 스프링 부트 애플리케이션을 빌드하려면 스프링 부트 그레이들 플러그인이 필요합니다.
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+    }
+}
+
+// 적용할 플러그인을 선언합니다.
+apply plugin: 'java'        // 표준 자바 프로젝트 유형을 적용합니다.
+apply plugin: 'eclipse'     // 이클립스 프로젝트 파일을 만드는 데 필요합니다.
+apply plugin: 'idea'        // IntelliJ IDEA 프로젝트 파일을 만드는 데 필요합니다.
+apply plugin: 'spring-boot' // 스프링 부트 애플리케이션 지원을 적용합니다.
+
+// jar로 패키징할 때 사용할 이름과 버전을 선언합니다.
+jar {
+    baseName = 'hellogradle'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+// 프로젝트에서 의존 라이브러리를 찾는 데 사용할 리포지토리를 선언합니다.
+repositories {
+    mavenCentral() 
+}
+
+// 소스를 컴파일하고 빌드 완료된 프로그램을 실행할 때 사용할 자바 버전을 선언합니다.
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 프로젝트에서 컴파일, 테스트 중에 사용할 의존 라이브러리를 선언합니다.
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+// 손쉬운 배포를 위해 생성할 그레이들 래퍼 버전을 선언합니다.
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}

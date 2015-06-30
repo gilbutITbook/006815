@@ -1,0 +1,38 @@
+buildscript {
+    repositories() {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'hajiboot-di'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
+
+bootRun {
+	standardInput = System.in
+}

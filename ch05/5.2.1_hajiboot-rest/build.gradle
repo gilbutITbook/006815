@@ -1,0 +1,46 @@
+buildscript {
+    repositories() {
+        mavenCentral()
+        maven { url "http://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+        classpath("org.springframework:springloaded:1.2.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+
+jar {
+    baseName = 'hajiboot-rest'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("com.h2database:h2")
+    compile("postgresql:postgresql:9.0-801.jdbc4")
+    provided("org.projectlombok:lombok:1.16.4")
+    compile("org.lazyluke:log4jdbc-remix:0.2.7")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
